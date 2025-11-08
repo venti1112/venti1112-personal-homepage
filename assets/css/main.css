@@ -3,34 +3,34 @@ body {
     line-height: 1.8;
     margin: 0;
     padding: 0;
-    color: #2d3436;
+    color: #1a1a1a;
     background: url('/assets/image/wp.jpg') no-repeat center center fixed;
     background-size: cover;
-    background-color: rgba(249, 249, 249, 0.8);
-    background-blend-mode: overlay;
 }
 
 .container {
     max-width: 1200px;
     margin: 2rem auto;
     padding: 2rem;
-    background-color: white;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 h1, h3 {
-    color: #2c3e50;
     margin-bottom: 1.5rem;
     font-weight: 600;
+    background: linear-gradient(90deg, #156c54, #114a3a);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
 h1 {
     font-size: 2.5rem;
-    background: linear-gradient(90deg, #3498db, #2c3e50);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
     display: inline-block;
 }
 
@@ -46,20 +46,25 @@ a:hover {
 }
 
 nav {
-	    background: #2bc5a2;
+    background: rgba(255, 255, 255, 0.3);
     padding: 1rem 0;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
 }
 
 nav a {
-    color: white;
+    color: #156c54;
     margin: 0 1.5rem;
     padding: 0.5rem 0;
     position: relative;
     font-weight: 500;
+    font-size: 1.1rem;
+    line-height: 1.5;
 }
 
 nav a:hover {
+    color: white;
     text-decoration: none;
 }
 
@@ -82,7 +87,7 @@ nav a:hover::after {
     font-size: 1.1rem;
     line-height: 1.8;
     margin-bottom: 1.5rem;
-    color: #636e72;
+    color: #4d4d4d;
 }
 
 .container ul {
@@ -97,13 +102,15 @@ nav a:hover::after {
 .container li a {
     display: inline-block;
     padding: 0.5rem 1rem;
-    background-color: #f1f9fe;
+    background-color: rgba(43, 197, 162, 0.8);
+    color: white;
     border-radius: 4px;
     transition: all 0.3s ease;
+    text-decoration: none;
 }
 
 .container li a:hover {
-    background-color: #d6eaf8;
+    background-color: rgba(43, 197, 162, 0.9);
     transform: translateY(-2px);
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
@@ -151,15 +158,17 @@ nav a:hover::after {
     justify-content: center;
     min-height: 60px;
     padding: 10px;
-    background-color: #ecf0f1;
+    background-color: rgba(43, 197, 162, 0.8);
+    color: white;
     border-radius: 6px;
     transition: all 0.3s ease;
     text-align: center;
     font-weight: 500;
+    text-decoration: none;
 }
 
 .download-links a:hover {
-    background-color: #d6eaf8;
+    background-color: rgba(43, 197, 162, 0.9);
     transform: translateY(-3px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
@@ -167,7 +176,7 @@ nav a:hover::after {
 .github-link {
     margin-top: 2rem;
     padding: 1rem;
-    background-color: #f8f9fa;
+    background-color: rgba(255, 255, 255, 0.3);
     border-radius: 6px;
     text-align: center;
 }
@@ -179,4 +188,54 @@ nav a:hover::after {
 
 .github-link a:hover {
     color: #3498db;
+}
+
+/* New styles extracted from HTML */
+.nav-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid white;
+    margin-right: 1rem;
+}
+
+.nav-username {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin-right: 1.5rem;
+}
+
+.server-config {
+    margin-bottom: 2rem;
+}
+
+.config-code {
+    margin-bottom: 1.5rem;
+}
+
+.code-box {
+    background-color: rgba(255, 255, 255, 0.3);
+    padding: 1rem;
+    border-radius: 4px;
+    font-family: monospace;
+    margin: 1rem 0;
+    word-break: break-all;
+}
+
+.copy-btn {
+    background-color: rgba(43, 197, 162, 0.8);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+}
+
+.copy-btn:hover {
+    background-color: rgba(43, 197, 162, 0.9);
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
