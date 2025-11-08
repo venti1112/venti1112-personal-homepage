@@ -1,0 +1,78 @@
+/* 基础样式 */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-color: #f5f5f5;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* 导航样式 */
+nav {
+    background-color: #2c3e50;
+    padding: 10px 0;
+}
+
+nav a {
+    color: white;
+    margin-right: 15px;
+}
+
+/* 下载链接样式 */
+.download-links {
+    margin: 20px 0;
+}
+
+.download-links a {
+    display: block;
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #ecf0f1;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.download-links a:hover {
+    background-color: #d6eaf8;
+}
+
+/* 服务器配置样式 */
+.server-config {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-top: 20px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .download-links a {
+        padding: 8px;
+    }
+}
