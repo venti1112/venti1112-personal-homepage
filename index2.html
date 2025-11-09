@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>venti1112的小站</title>
+    <link rel="icon" type="image/jpg" href="/assets/image/favicon.jpg">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <style>
+        /* 全局样式 */
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #9b59b6;
+            --accent-color: #e74c3c;
+            --text-color: #2c3e50;
+            --light-bg: #f8f9fa;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        /* 导航栏样式 */
+        nav {
+            display: flex;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--card-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 1rem;
+            border: 2px solid var(--primary-color);
+        }
+        
+        nav a {
+            margin: 0 1rem;
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: var(--transition);
+        }
+        
+        nav a:hover {
+            color: var(--primary-color);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: var(--transition);
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-active {
+            color: var(--primary-color);
+        }
+        
+        .nav-active::after {
+            width: 100%;
+        }
+        
+        /* 主容器样式 */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* 英雄区域 */
+        .hero {
+            text-align: center;
+            padding: 3rem 1rem;
+            margin-bottom: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+        }
+        
+        /* 内容卡片 */
+        .content-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+        }
+        
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .content-card h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light-bg);
+        }
+        
+        /* 联系信息样式 */
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 1.2rem;
+            background: var(--light-bg);
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+        
+        .contact-item:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .contact-item a {
+            color: inherit;
+            text-decoration: none;
+        }
+        
+        /* 服务卡片样式 */
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .service-card {
+            background: var(--light-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: var(--transition);
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .service-card:hover {
+            transform: translateX(5px);
+            background: white;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .service-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .service-card a {
+            display: inline-block;
+            margin-top: 0.8rem;
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .service-card a:hover {
+            text-decoration: underline;
+        }
+        
+        /* 游戏角色展示 */
+        .games-section {
+            margin-top: 2rem;
+        }
+        
+        .games-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .game-tag {
+            padding: 0.5rem 1rem;
+            background: var(--light-bg);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        
+        .game-tag:hover {
+            background: var(--secondary-color);
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-avatar {
+                margin-bottom: 0.5rem;
+            }
+            
+            nav a {
+                margin: 0.3rem 0;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .services {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* 加载动画 */
+        .loader {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        
+        .loader.active {
+            display: flex;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid var(--light-bg);
+            border-top: 5px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1rem;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- 加载动画 -->
+    <div class="loader" id="loader">
+        <div class="spinner"></div>
+        <p>加载中...</p>
+    </div>
+    
+    <nav>
+        <img src="/assets/image/favicon.jpg" alt="venti1112头像" class="nav-avatar">
+        <a href="/" class="nav-active">首页</a>
+        <a href="/about.html">关于我</a>
+        <a href="/rustdesk/">RustDesk服务器</a>
+    </nav>
+    
+    <div class="container">
+        <div class="hero">
+            <h1>欢迎来到venti1112的小站</h1>
+            <p>一个热爱计算机的初中生，方块人，旅行者，开拓者，绳匠，舰长，大爱巴巴托斯大人！</p>
+            <p>虽然对计算机充满热情，但自认为还有很多需要学习的地方！</p>
+        </div>
+        
+        <div class="content-card">
+            <h2>关于我</h2>
+            <p>你好！我是venti1112，畜衷牲一个，热爱计算机（但是是个大笨蛋！）</p>
+            <p>我是：</p>
+            <div class="games-grid">
+                <div class="game-tag">方块人</div>
+                <div class="game-tag">旅行者</div>
+                <div class="game-tag">开拓者</div>
+                <div class="game-tag">绳匠</div>
+                <div class="game-tag">舰长 </div>
+            </div>
+            <p>大爱巴巴托斯大人！，喜欢他的自由精神和音乐才华！</p>
+        </div>
+        
+        <div class="content-card">
+            <h2>联系我</h2>
+            <p>如果你有任何问题或想与我交流，可以通过以下方式联系我：</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span>邮箱：</span>
+                    <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b182868989828784898887f1c0c09fd2dedc">[email&#160;protected]</a>
+                </div>
+                <div class="contact-item">
+                    <span>QQ：3788365896</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-card">
+            <h2>提供的服务</h2>
+            <p>目前我提供以下服务：</p>
+            <div class="services">
+                <div class="service-card">
+                    <h3>RustDesk远程桌面服务器</h3>
+                    <p>提供稳定的RustDesk远程桌面中继服务器，帮助您实现安全、高效的远程连接。</p>
+                    <a href="/rustdesk/">了解更多 &rarr;</a>
+                </div>
+            </div>
+            <p style="margin-top: 1.5rem; font-style: italic;">未来可能会添加更多服务，敬请期待！</p>
+        </div>
+    </div>
+    
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script>
+        // 简单的加载动画控制
+        document.addEventListener('DOMContentLoaded', function() {
+            // 模拟页面加载
+            setTimeout(() => {
+                document.getElementById('loader').classList.remove('active');
+            }, 1000);
+            
+            // 为所有链接添加加载动画
+            document.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    if (this.getAttribute('href') && !this.getAttribute('href').startsWith('#')) {
+                        document.getElementById('loader').classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
