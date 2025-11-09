@@ -10,6 +10,12 @@ loadingScreen.appendChild(loadingText);
 document.body.appendChild(loadingScreen);
 const bgImage = new Image();
 bgImage.src = '/assets/image/wp.jpg';
+bgImage.onload = function() {
+    document.body.style.backgroundImage = `url('${this.src}')`;
+    document.body.style.backgroundSize = 'cover';
+    document.body.style.backgroundPosition = 'center';
+    document.body.style.backgroundAttachment = 'fixed';
+};
 document.addEventListener('click', function(e) {
     if (e.target.tagName === 'A' && e.target.href && !e.target.href.includes('#')) {
         e.preventDefault();
