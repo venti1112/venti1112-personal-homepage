@@ -4,8 +4,9 @@ body {
     margin: 0;
     padding: 0;
     color: #1a1a1a;
-    background: url('/assets/image/wp.jpg') no-repeat center center fixed;
+    background: url('/assets/image/wp.jpg') no-repeat center center;
     background-size: cover;
+    min-height: 100vh;
     opacity: 1;
     transition: opacity 0.3s ease;
 }
