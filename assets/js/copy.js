@@ -1,4 +1,3 @@
-// ... existing code ...
 function copyServerCode() {
     const code = document.getElementById('serverCode').innerText;
     navigator.clipboard.writeText(code)
