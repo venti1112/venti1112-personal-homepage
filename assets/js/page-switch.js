@@ -50,9 +50,6 @@ function showPage(pageId) {
     if (activeLink) {
         activeLink.classList.add('nav-active');
     }
-
-    // 更新当前页面记录
-    currentPage = pageId;
 }
 
 // 处理导航链接点击事件
@@ -71,7 +68,6 @@ window.addEventListener('load', function() {
     const hash = window.location.hash.substring(1);
     if (hash) {
         showPage(hash);
-        currentPage = hash;
     }
 });
 
@@ -80,6 +76,5 @@ window.addEventListener('hashchange', function() {
     const hash = window.location.hash.substring(1);
     if (hash) {
         showPage(hash);
-        currentPage = hash;
     }
 });
