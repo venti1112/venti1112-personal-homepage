@@ -1,4 +1,4 @@
-function copyServerCode() {
+function copyServerCode(event) {
     const code = document.getElementById('serverCode').innerText;
     navigator.clipboard.writeText(code)
         .then(() => {

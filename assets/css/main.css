@@ -273,21 +273,22 @@ nav a:hover::after {
 }
 @keyframes slideOutLeft {
     from {
-        transform: translateX(0);
+        transform: translateX(-50%) translateX(0);
         opacity: 1;
     }
     to {
-        transform: translateX(-100%);
+        transform: translateX(-50%) translateX(-100%);
         opacity: 0;
     }
 }
+
 @keyframes slideOutRight {
     from {
-        transform: translateX(0);
+        transform: translateX(-50%) translateX(0);
         opacity: 1;
     }
     to {
-        transform: translateX(100%);
+        transform: translateX(-50%) translateX(100%);
         opacity: 0;
     }
 }
