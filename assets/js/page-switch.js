@@ -36,6 +36,8 @@ function showPage(pageId, isInitial = false) {
         });
         targetElement.classList.add('active');
         currentPage = pageId;
+        const pageTitle = targetElement.getAttribute('page-title') || 'venti1112的小站';
+        document.title = `${pageTitle} - venti1112的小站`;
         document.querySelectorAll('.nav-link').forEach(link => {
             link.classList.remove('nav-active');
         });
@@ -51,6 +53,8 @@ function showPage(pageId, isInitial = false) {
         return;
     }
     if (currentPage === pageId) return;
+    const pageTitle = targetElement.getAttribute('page-title') || 'venti1112的小站';
+    document.title = `${pageTitle} - venti1112的小站`;
     isAnimating = true;
     const navLinks = Array.from(document.querySelectorAll('.nav-link'));
     const currentIndex = navLinks.findIndex(link => link.getAttribute('data-page') === currentPage);

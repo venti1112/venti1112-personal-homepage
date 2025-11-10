@@ -1,3 +1,4 @@
+let copyTimeout = null;
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.copy-btn').forEach(button => {
         button.addEventListener('click', copyServerCode);
@@ -26,9 +27,14 @@ function copyServerCode(event) {
         .then(() => {
             const btn = event.target;
             const originalText = btn.textContent;
+            if (copyTimeout) {
+            clearTimeout(copyTimeout);
+            copyTimeout = null;
+            }
             btn.textContent = '复制成功！';
             setTimeout(() => {
                 btn.textContent = originalText;
+                copyTimeout = null;
             }, 2000);
         })
         .catch(err => {

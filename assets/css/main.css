@@ -56,12 +56,12 @@ h1 {
     display: inline-block;
 }
 a {
-    color: #3498db;
+    color: #156c54;
     text-decoration: none;
     transition: all 0.3s ease;
 }
 a:hover {
-    color: #2980b9;
+    color: #4cd8b8;
     text-decoration: underline;
 }
 nav {
@@ -148,20 +148,6 @@ nav a:hover {
     background-color: rgba(43, 197, 162, 0.9);
     transform: translateY(-3px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-.github-link {
-    margin-top: 2rem;
-    padding: 1rem;
-    background-color: rgba(255, 255, 255, 0.3);
-    border-radius: 6px;
-    text-align: center;
-}
-.github-link a {
-    color: #2c3e50;
-    font-weight: 500;
-}
-.github-link a:hover {
-    color: #3498db;
 }
 .server-config {
     margin-bottom: 2rem;
