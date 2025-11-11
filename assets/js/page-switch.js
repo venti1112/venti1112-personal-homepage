@@ -6,10 +6,9 @@ const pageTitles = {
 let currentPage = null;
 let isAnimating = false;
 let nextPage = null;
-let underline, container;
-let contentBox;
+let underline, container, contentBox, navLinks;
 function updateUnderlinePosition(pageId, animate = false) {
-    const activeLink = document.querySelector(`.nav-link[data-page="${pageId}"]`);
+    const activeLink = navLinks.find(link => link.dataset.page === pageId);
     if (!activeLink || !underline || !container) return;
     document.body.offsetHeight;
     const linkRect = activeLink.getBoundingClientRect();
@@ -21,23 +20,30 @@ function updateUnderlinePosition(pageId, animate = false) {
     const width = linkRect.width;
     const extendedWidth = width + 2;
     const adjustedLeft = Math.floor(left) - 0.5;
+    underline.style.width = animate ? '0' : `${extendedWidth}px`;
+    underline.style.transform = `translateX(${adjustedLeft}px)`;
     if (animate) {
-        underline.style.width = '0';
         void underline.offsetWidth;
-        underline.style.transform = `translateX(${adjustedLeft}px)`;
-        underline.style.width = `${extendedWidth}px`;
-    } else {
-        underline.style.transform = `translateX(${adjustedLeft}px)`;
         underline.style.width = `${extendedWidth}px`;
     }
 }
-function initPageScripts() {
-    document.querySelectorAll('.copy-btn').forEach(button => {
-        button.removeEventListener('click', copyServerCode);
-        button.addEventListener('click', copyServerCode);
+function resetContentBoxHeight() {
+    const { transition } = contentBox.style;
+    contentBox.style.transition = 'none';
+    contentBox.style.height = 'auto';
+    void contentBox.offsetHeight;
+    contentBox.style.transition = transition;
+}
+function updateNavLinksState(pageId) {
+    navLinks.forEach(link => {
+        link.classList.toggle('nav-active', link.dataset.page === pageId);
     });
 }
 function showPage(pageId, isInitial = false) {
+    if (!pageTitles[pageId]) {
+        console.error(`无效的页面ID: ${pageId}`);
+        pageId = 'home';
+    }
     if (currentPage === pageId && !isInitial) return;
     if (isAnimating) {
         nextPage = pageId;
@@ -52,47 +58,29 @@ function showPage(pageId, isInitial = false) {
         })
         .then(html => {
             contentLoading.style.display = 'none';
+            const pageContent = document.getElementById('page-content');
             if (!currentPage) {
-                document.getElementById('page-content').innerHTML = html;
+                pageContent.innerHTML = html;
                 currentPage = pageId;
                 document.title = `${pageTitles[pageId]} - venti1112的小站`;
-                document.querySelectorAll('.nav-link').forEach(link => {
-                    link.classList.remove('nav-active');
-                });
-                const activeLink = document.querySelector(`.nav-link[data-page="${pageId}"]`);
-                if (activeLink) {
-                    activeLink.classList.add('nav-active');
-                    updateUnderlinePosition(pageId, true);
-                }
-                
+                updateNavLinksState(pageId);
+                updateUnderlinePosition(pageId, true);
                 if (isInitial) {
                     window.history.replaceState(null, null, `#${pageId}`);
                 }
-                
-                initPageScripts();
                 return;
             }
             isAnimating = true;
-            const targetHtml = html;
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('nav-active');
-            });
-            const activeLink = document.querySelector(`.nav-link[data-page="${pageId}"]`);
-            if (activeLink) {
-                activeLink.classList.add('nav-active');
-                updateUnderlinePosition(pageId, true);
-            }
-            const navLinks = Array.from(document.querySelectorAll('.nav-link'));
-            const currentIndex = navLinks.findIndex(link => link.getAttribute('data-page') === currentPage);
-            const targetIndex = navLinks.findIndex(link => link.getAttribute('data-page') === pageId);
-            if (currentIndex < targetIndex) {
-                contentBox.classList.add('slide-out-left');
-            } else {
-                contentBox.classList.add('slide-out-right');
-            }
+            updateNavLinksState(pageId);
+            updateUnderlinePosition(pageId, true);
+            const currentIndex = navLinks.findIndex(link => link.dataset.page === currentPage);
+            const targetIndex = navLinks.findIndex(link => link.dataset.page === pageId);
+            const directionClass = currentIndex < targetIndex ? 'slide-out-left' : 'slide-out-right';
+            contentBox.classList.add(directionClass);
             setTimeout(() => {
-                document.getElementById('page-content').innerHTML = targetHtml;
-                contentBox.classList.remove('slide-out-left', 'slide-out-right');
+                resetContentBoxHeight();
+                pageContent.innerHTML = html;
+                contentBox.classList.remove('slide-out-left', 'slide-out-right', 'slide-in-bottom');
                 contentBox.classList.add('slide-in-bottom');
                 setTimeout(() => {
                     contentBox.classList.remove('slide-in-bottom');
@@ -100,7 +88,6 @@ function showPage(pageId, isInitial = false) {
                     isAnimating = false;
                     document.documentElement.scrollTop = 0;
                     document.title = `${pageTitles[pageId]} - venti1112的小站`;
-                    initPageScripts();
                     if (nextPage) {
                         const target = nextPage;
                         nextPage = null;
@@ -112,17 +99,16 @@ function showPage(pageId, isInitial = false) {
         .catch(error => {
             console.error(error);
             contentLoading.style.display = 'none';
+            isAnimating = false;
+            nextPage = null;
             alert(`页面加载失败: ${error.message}\n请检查网络连接或重试`);
         });
 }
-
 window.addEventListener('load', function() {
     underline = document.querySelector('.nav-underline');
     container = document.querySelector('.nav-container');
     contentBox = document.querySelector('.content-box');
-    if (typeof copyServerCode === 'function') {
-        initPageScripts();
-    }
+    navLinks = Array.from(document.querySelectorAll('.nav-link'));
     const hash = window.location.hash.substring(1) || 'home';
     showPage(hash, true);
     let resizeTimeout;
@@ -139,9 +125,14 @@ window.addEventListener('load', function() {
     const mediaQuery = window.matchMedia('(max-width: 768px), (max-width: 480px)');
     mediaQuery.addEventListener('change', handleResize);
 });
-window.addEventListener('hashchange', function() {
+window.addEventListener('hashchange', () => {
     const hash = window.location.hash.substring(1);
-    if (hash) {
-        showPage(hash);
+    if (hash) showPage(hash);
+});
+window.addEventListener('beforeunload', () => {
+    if (copyTimeout) {
+        clearTimeout(copyTimeout);
+        copyTimeout = null;
     }
+    document.body.removeEventListener('click', copyServerCode);
 });

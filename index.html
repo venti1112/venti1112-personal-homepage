@@ -1,11 +1,14 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
+<!DOCTYPE html><html lang="zh-CN" dir="ltr">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
+    <meta name="description" content="venti1112的个人网站，包含个人介绍和RustDesk服务器信息">
+    <meta name="theme-color" content="#156c54">
     <title>venti1112的小站</title>
     <link rel="icon" type="image/jpg" href="/assets/image/favicon.jpg">
     <link rel="stylesheet" href="/assets/css/main.css">
+    <script src="/assets/js/page-switch.js" defer></script>
+    <script src="/assets/js/copy.js" defer></script>
     <style>
         #loading-screen {
             position: fixed;
@@ -43,29 +46,28 @@
     </style>
 </head>
 <body>
-    <div id="loading-screen">
-        <div class="loader"></div>
+    <div id="loading-screen" aria-live="polite" aria-label="页面加载中">
+        <div class="loader" role="status"></div>
         <p class="loading-text">加载中...</p>
     </div>
-    <nav>
-        <div class="nav-container">
-            <img src="/assets/image/favicon.jpg" alt="venti1112头像" class="nav-avatar">
-            <a href="#home" class="nav-link" data-page="home">首页</a>
-            <a href="#about" class="nav-link" data-page="about">关于我</a>
-            <a href="#rustdesk" class="nav-link" data-page="rustdesk">RustDesk服务器</a>
-            <div class="nav-underline"></div>
-        </div>
-    </nav>
-    <div class="content-box" id="content-box">
-        <div id="content-loading" class="content-loading" style="display: none;">
-            <div class="loader" style="border-width: 5px; width: 40px; height: 40px;"></div>
+    <header>
+        <nav aria-label="主导航">
+            <div class="nav-container">
+                <img src="/assets/image/favicon.jpg" alt="venti1112头像" class="nav-avatar" width="40" height="40">
+                <a href="#home" class="nav-link" data-page="home">首页</a>
+                <a href="#about" class="nav-link" data-page="about">关于我</a>
+                <a href="#rustdesk" class="nav-link" data-page="rustdesk">RustDesk服务器</a>
+                <div class="nav-underline"></div>
+            </div>
+        </nav>
+    </header>
+    <main class="content-box" id="content-box">
+        <div id="content-loading" class="content-loading" style="display: none;" aria-live="polite">
+            <div class="loader" style="border-width: 5px; width: 40px; height: 40px;" role="status"></div>
             <p class="loading-text" style="margin-top: 10px; color: #156c54; font-size: 16px;">加载中...</p>
         </div>
-        <div id="page-content"></div>
-    </div>
-    
-    <script src="/assets/js/page-switch.js"></script>
-    <script src="/assets/js/copy.js"></script>
+        <div id="page-content" role="main"></div>
+    </main>
     <script>
     window.addEventListener('load', function() {
         const loadingScreen = document.getElementById('loading-screen');
