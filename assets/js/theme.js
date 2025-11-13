@@ -1,8 +1,20 @@
 // 从localStorage获取存储的主题名称
-const getStoredTheme = () => localStorage.getItem('theme')
+const getStoredTheme = () => {
+  try {
+    return localStorage.getItem('theme')
+  } catch (e) {
+    return null;
+  }
+}
 
 // 存储主题到localStorage
-const setStoredTheme = theme => localStorage.setItem('theme', theme)
+const setStoredTheme = theme => {
+  try {
+    localStorage.setItem('theme', theme)
+  } catch (e) {
+    // 私隐模式或存储被阻止时静默失败
+  }
+}
 
 // 获取首选主题（优先使用存储的主题，否则根据系统偏好）
 const getPreferredTheme = () => {

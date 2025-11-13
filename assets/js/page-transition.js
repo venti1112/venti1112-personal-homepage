@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
         contentLoading.style.display = 'flex';
 
         // 通过fetch异步加载页面HTML内容
-        fetch(`/page/${pageId}.html`)
+        fetch(`/page/${pageId}.html`, { credentials: 'same-origin' })
             .then(response => {
                 if (!response.ok) throw new Error(`加载页面失败: ${response.status}`);
                 return response.text();
