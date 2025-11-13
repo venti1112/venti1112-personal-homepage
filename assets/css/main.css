@@ -1,292 +1,369 @@
 :root {
-    /* 主题颜色 */
-    --theme-bg: rgba(255, 255, 255, 0.3);
-    --theme-bg-dark: rgba(0, 0, 0, 0.3);
-    --theme-primary: #4cd8b8;
-    --theme-secondary: #156c54;
-    --theme-text: #000;
-    --theme-text-inverse: #fff;
+    /* 主题颜色变量 */
+    --theme-bg: rgba(255, 255, 255, 0.3); /* 主背景颜色，半透明白色 */
+    --theme-bg-dark: rgba(0, 0, 0, 0.3); /* 深色模式背景颜色，调整透明度至0.7以降低背景亮度 */
+    --theme-primary: #4cd8b8; /* 主要强调色，青绿色 */
+    --theme-secondary: #156c54; /* 次要强调色，深绿色 */
+    --theme-text: #000; /* 默认文本颜色，黑色 */
+    --theme-text-inverse: #fff; /* 反色文本，白色 */
 
-    /* 导航栏 */
-    --navbar-padding: 1.1rem 1rem;
-    --navbar-min-height: 50px;
-    --navbar-logo-height: 40px;
-    --navbar-link-padding: 0.5rem 1rem;
-    --navbar-link-font-size: 1.1rem;
-    --navbar-item-spacing: 1rem;
-    --navbar-blur: blur(12px);
-    --navbar-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    /* 导航栏尺寸与视觉效果变量 */
+    --navbar-padding: 1.1rem 1rem; /* 导航栏内边距 */
+    --navbar-min-height: 50px; /* 导航栏最小高度 */
+    --navbar-logo-height: 40px; /* 导航栏Logo图片高度 */
+    --navbar-link-padding: 0.5rem 1rem; /* 导航链接内边距 */
+    --navbar-link-font-size: 1.1rem; /* 导航链接字体大小 */
+    --navbar-item-spacing: 1rem; /* 导航项之间间距 */
+    --navbar-blur: blur(8px); /* 导航栏背景模糊效果 */
+    --navbar-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* 导航栏阴影效果 */
+    --navbarlink-active: #fff; /* 导航链接激活状态颜色 */
 
-    /* 导航横条 */
-    --underline-height: 3px;
-    --underline-color: var(--theme-text-inverse);
-    --underline-offset: 0px;
-    --underline-bottom: 0px;
-    --navbar-underline-transition-easing: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    /* 导航横条样式变量 */
+    --underline-height: 3px; /* 导航下划线高度 */
+    --underline-color: #fff; /* 导航下划线颜色 */
+    --underline-offset: 0px; /* 导航下划线水平偏移量 */
+    --underline-bottom: 0px; /* 导航下划线底部距离 */
+    --navbar-underline-transition-easing: cubic-bezier(0.68, -0.55, 0.27, 1.55); /* 导航下划线过渡动画缓动函数 */
 
-    /* 内容区域 */
-    --content-padding: 2rem;
-    --content-border: 1px solid rgba(255, 255, 255, 0.18);
-    --content-bg: rgba(255, 255, 255, 0.3);
-    --content-blur: blur(3px);
-    --content-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    /* 内容区域样式变量 */
+    --content-padding: 2rem; /* 内容区域内外边距 */
+    --content-border: 1px solid rgba(255, 255, 255, 0.18); /* 内容区域边框 */
+    --content-blur: blur(8px); /* 内容区域背景模糊 */
+    --content-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); /* 内容区域阴影 */
+    --content-min-height: 300px; /* 内容区域最小高度 */
 
-    /* 按钮 */
-    --button-min-height: 60px;
-    --button-padding: 10px;
-    --button-border-radius: 6px;
+    /* 按钮样式变量 */
+    --button-min-height: 60px; /* 按钮最小高度 */
+    --button-padding: 10px; /* 按钮内边距 */
+    --button-border-radius: 6px; /* 按钮圆角半径 */
 
-    /* 通用样式 */
-    --radius-md: 8px;
-    --duration-md: 0.5s;
-    --easing-standard: ease;
-    --loader-border-width: 5px;
+    /* 通用样式变量 */
+    --radius-sm: 4px; /* 小型圆角半径 */
+    --radius-md: 8px; /* 中等圆角半径 */
+    --font-size-sm: 16px; /* 小号字体大小 */
+    --gap-md: 0.5rem; /* 中等间距 */
+    --loader-size: 40px; /* 加载器尺寸 */
+    --easing-standard: ease; /* 标准缓动函数 */
+    --loader-border-width: 5px; /* 加载器边框宽度 */
+    --duration-sm: 0.2s;/* 小型持续时间，用于悬停/下划线过渡 */
+    --duration-md: 0.5s;/* 中等持续时间，用于切换页面/深浅色切换过渡 */
+    --gap-md-alt: 10px;/* 中等替代间距，用于加载组件 */
+    --gap-lg: 1rem;/* 大间距标准值，用于内容区域和代码框 */
+
+    /* 调整主题切换按钮激活反馈样式 */
+    --theme-toggle-underline-height: 2px; /* 减小下划线高度 */
+    --theme-toggle-underline-color: var(--theme-primary); /* 默认主题强调色 */
+    --theme-toggle-underline-hover-color: #fff; /* 悬停为白色 */
+    --theme-toggle-underline-bottom: -2px; /* 微调位置 */
 }
-a {
-    color: var(--theme-secondary);
-    text-decoration: none;
-    transition: all 0.3s ease;
+
+/* 深色模式主题变量覆盖 */
+[data-bs-theme="dark"] {
+    --theme-bg: var(--theme-bg-dark); /* 深色模式使用深色背景 */
+    --theme-text: #fff; /* 深色模式文本使用白色 */
+    --theme-text-inverse: #000; /* 深色模式反色文本使用黑色 */
+    --theme-primary: #156c54; /* 深色模式主要强调色，深绿色 */
+    --theme-secondary: #4cd8b8; /* 深色模式次要强调色，青绿色 */
 }
-/* 全局链接悬停状态 */
-a:hover {
-    color: var(--theme-primary);
-    text-decoration: none;
+
+/* 深色模式背景调暗层 */
+[data-bs-theme="dark"]::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--theme-bg-dark); /* 深色覆盖层 */
+    z-index: -1;
+    pointer-events: none;
 }
-/* 全局 */
+
+/* 全局元素默认样式：统一过渡、圆角和边框 */
 * {
     transition: background-color var(--duration-md) var(--easing-standard), 
-               color var(--duration-md) var(--easing-standard);
-    border-radius: var(--radius-md);
-    border: none
+               color var(--duration-md) var(--easing-standard) !important; /* 统一背景和文本颜色过渡效果 */
+    border-radius: var(--radius-md) !important; /* 统一圆角大小 */
+    border: none !important; /* 去除所有元素边框 */
 }
 
-/* 深色模式 */
-[data-bs-theme="dark"] {
-    --theme-bg: var(--theme-bg-dark);
-    --theme-text: var(--theme-text-inverse);
-    --theme-text-inverse: var(--theme-text);
+/* 链接基础样式 */
+a {
+    color: var(--theme-secondary); /* 链接文字颜色 */
+    text-decoration: none; /* 去除下划线 */
+    transition: all var(--duration-sm) var(--easing-standard);
 }
 
+/* 链接悬停状态增强 */
+a:hover {
+    color: var(--theme-primary); /* 悬停时变为强调色 */
+    text-decoration: none; /* 保持无下划线 */
+}
+
+/* 页面主体背景与布局 */
 body {
-    background: url('/assets/image/wp.jpg') no-repeat center center fixed;
-    background-size: cover;
-    margin: 0;
-    height: 100%;
-    padding-top: calc(var(--navbar-min-height) + 1rem);
-    background-color: var(--theme-bg);
+    background: url('/assets/image/wp.jpg') no-repeat center center fixed; /* 设置背景图片 */
+    background-size: cover; /* 背景图片覆盖整个页面 */
+    margin: 0; /* 重置外边距 */
+    height: 100%; /* 高度占满视口 */
+    padding-top: calc(var(--navbar-min-height) + var(--gap-lg));
+    background-color: var(--theme-bg); /* 背景色 */
 }
 
-/* 按钮 */
-.btn {
-    border: none; /* 去除边框边框 */
-}
-
-/* 保持导航栏其他样式不变 */
+/* 固定定位导航栏样式 */
 .navbar {
-    position: fixed;
-    background-color: var(--theme-bg);
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: var(--navbar-padding);
-    min-height: var(--navbar-min-height);
-    backdrop-filter: var(--navbar-blur);
-    -webkit-backdrop-filter: var(--navbar-blur);
-    box-shadow: var(--navbar-shadow);
-    z-index: 1030;
+    position: fixed; /* 固定定位 */
+    background-color: var(--theme-bg); /* 背景颜色 */
+    top: 0; /* 顶部对齐 */
+    left: 0; /* 左侧对齐 */
+    width: 100%; /* 宽度占满 */
+    padding: var(--navbar-padding); /* 内边距 */
+    min-height: var(--navbar-min-height); /* 最小高度 */
+    backdrop-filter: var(--navbar-blur); /* 背景模糊滤镜 */
+    -webkit-backdrop-filter: var(--navbar-blur); /* Webkit兼容背景模糊 */
+    box-shadow: var(--navbar-shadow); /* 阴影效果 */
+    z-index: 1030; /* 层级高于其他元素 */
 }
 
-/* 导航栏容器对齐 */
+/* 导航栏容器居中布局 */
 .navbar > .container-fluid {
-    position: relative;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    position: relative; /* 相对定位 */
+    max-width: 1200px; /* 最大宽度 */
+    margin-left: auto; /* 水平居中 */
+    margin-right: auto; /* 水平居中 */
+    padding-left: 1rem; /* 左内边距 */
+    padding-right: 1rem; /* 右内边距 */
 }
 
+/* 导航菜单下划线指示器 */
 .nav-underline {
-    position: absolute;
-    bottom: var(--underline-bottom);
-    left: 0;
-    height: var(--underline-height);
-    background-color: var(--underline-color);
-    transition: transform 0.3s var(--navbar-underline-transition-easing), width 0.3s var(--navbar-underline-transition-easing);
-    transform-origin: left;
-    z-index: 1;
+    position: absolute; /* 绝对定位 */
+    bottom: var(--underline-bottom); /* 底部位置 */
+    left: 0; /* 左侧对齐 */
+    height: var(--underline-height); /* 高度 */
+    background-color: var(--underline-color); /* 背景颜色 */
+    transition: transform var(--duration-md) var(--navbar-underline-transition-easing), 
+               width var(--duration-md) var(--navbar-underline-transition-easing) !important; /* 过渡动画 */
+    transform-origin: left; /* 变换原点在左侧 */
+    z-index: 1; /* 层级 */
 }
 
-/* 导航栏logo圆角样式 */
+/* 导航栏Logo图片高度控制 */
 .navbar-brand img {
-    height: var(--navbar-logo-height);
-    
+    height: var(--navbar-logo-height); /* 图片高度 */
 }
 
+/* 导航链接样式 */
 .navbar .nav-link {
-    padding: var(--navbar-link-padding);
-    font-size: var(--navbar-link-font-size);
-    color: var(--theme-primary);
+    padding: var(--navbar-link-padding); /* 内边距 */
+    font-size: var(--navbar-link-font-size); /* 字体大小 */
+    color: var(--theme-primary); /* 文本颜色 */
 }
+
+/* 激活或悬停的导航链接样式 */
 .navbar .nav-link.active, .navbar .nav-link:hover {
-    color: var(--theme-text-inverse);
+    color: var(--navbarlink-active); /* 文本颜色 */
 }
 
+/* 导航项间距设置 */
 .navbar-nav .nav-item {
-    margin-right: var(--navbar-item-spacing);
+    margin-right: var(--navbar-item-spacing); /* 右边距 */
 }
 
+/* 移除最后一个导航项的右边距 */
 .navbar-nav .nav-item:last-child {
-    margin-right: 0;
+    margin-right: 0; /* 右边距设为0 */
 }
 
-/* 按钮组容器样式 */
-.btn-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    justify-content: center;
-}
-
-/* 按钮组中的链接样式 */
-.btn-group a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: var(--button-min-height);
-    padding: var(--button-padding);
-    background-color: var(--theme-primary);
-    color: var(--theme-text-inverse);
-    border-radius: var(--button-border-radius);
-    transition: all 0.3s ease;
-    text-align: center;
-    font-weight: 500;
-    text-decoration: none;
-    flex: 1 1 200px;
-}
-
-/* 内容区域样式保持一致 */
+/* 主要内容区域容器样式 */
 .content-box {
-    max-width: 1200px;
-    margin: var(--content-padding) auto;
-    background: var(--content-bg);
-    backdrop-filter: var(--content-blur);
-    -webkit-backdrop-filter: var(--content-blur);
-    border-radius: var(--radius-md);
-    border: var(--content-border);
-    box-shadow: var(--content-shadow);
-    padding: var(--content-padding);
-    min-height: 300px;
-    animation-duration: 0.5s;
-    animation-fill-mode: both;
-    position: relative;
-    /* 防止水平溢出且保留垂直滚动 - 符合文本换行规范 */
-    overflow-x: hidden;
-    /* 允许长单词断行 - 防止长URL或代码导致横向滚动 */
-    word-wrap: break-word;
-    /* 强制内容在边界处换行 - 确保跨设备一致性 */
-    word-break: break-word;
+    max-width: 1200px; /* 最大宽度 */
+    margin: var(--content-padding) auto; /* 外边距自动居中 */
+    background: var(--theme-bg); /* 背景颜色 */
+    backdrop-filter: var(--content-blur); /* 背景模糊 */
+    -webkit-backdrop-filter: var(--content-blur); /* Webkit兼容模糊 */
+    border-radius: var(--radius-md); /* 圆角 */
+    border: var(--content-border); /* 边框 */
+    box-shadow: var(--content-shadow); /* 阴影 */
+    padding: var(--content-padding); /* 内边距 */
+    min-height: var(--content-min-height); /* 最小高度 */
+    animation-duration: var(--duration-md);
+    animation-fill-mode: both; /* 动画填充模式 */
+    position: relative; /* 相对定位 */
+    overflow-x: hidden; /* 水平溢出隐藏 */
+    word-wrap: break-word; /* 单词换行 */
+    word-break: break-word; /* 断字换行 */
 }
 
-/* 内容区域向左滑出动画 */
+/* 内容区域向左滑出动画应用 */
 .content-box.slide-out-left {
-    animation-name: slideOutLeft;
+    animation-name: slideOutLeft; /* 使用向左滑出动画 */
 }
 
-/* 内容区域向右滑出动画 */
+/* 内容区域向右滑出动画应用 */
 .content-box.slide-out-right {
-    animation-name: slideOutRight;
+    animation-name: slideOutRight; /* 使用向右滑出动画 */
 }
 
-/* 内容区域从底部滑入动画 */
+/* 内容区域从底部滑入动画应用 */
 .content-box.slide-in-bottom {
-    animation-name: slideInBottom;
+    animation-name: slideInBottom; /* 使用从底部滑入动画 */
 }
 
-/* 向左滑出动画定义 */
+/* 向左滑出动画关键帧 */
 @keyframes slideOutLeft {
     from {
-        transform: translateX(0);
-        opacity: 1;
+        transform: translateX(0); /* 起始位置：X轴偏移0 */
+        opacity: 1; /* 起始不透明度 */
     }
     to {
-        transform: translateX(-100%);
-        opacity: 0;
+        transform: translateX(-100%); /* 结束位置：X轴偏移-100% */
+        opacity: 0; /* 结束不透明度 */
     }
 }
 
-/* 向右滑出动画定义 */
+/* 向右滑出动画关键帧 */
 @keyframes slideOutRight {
     from {
-        transform: translateX(0);
-        opacity: 1;
+        transform: translateX(0); /* 起始位置：X轴偏移0 */
+        opacity: 1; /* 起始不透明度 */
     }
     to {
-        transform: translateX(100%);
-        opacity: 0;
+        transform: translateX(100%); /* 结束位置：X轴偏移100% */
+        opacity: 0; /* 结束不透明度 */
     }
 }
 
-/* 从底部滑入动画定义 */
+/* 从底部滑入动画关键帧 */
 @keyframes slideInBottom {
     from {
-        transform: translateY(100%);
-        opacity: 0;
+        transform: translateY(100%); /* 起始位置：Y轴偏移100% */
+        opacity: 0; /* 起始不透明度 */
     }
     to {
-        transform: translateY(0);
-        opacity: 1;
+        transform: translateY(0); /* 结束位置：Y轴偏移0 */
+        opacity: 1; /* 结束不透明度 */
     }
 }
 
-/* 内容加载中状态样式 */
+/* 内容加载状态遮罩层样式 */
 .content-loading {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.1);
-    z-index: 10;
+    display: flex; /* 弹性布局 */
+    flex-direction: column; /* 纵向排列 */
+    justify-content: center; /* 垂直居中 */
+    align-items: center; /* 水平居中 */
+    position: absolute; /* 绝对定位 */
+    top: 0; /* 顶部对齐 */
+    left: 0; /* 左侧对齐 */
+    width: 100%; /* 宽度占满 */
+    height: 100%; /* 高度占满 */
+    background: rgba(255, 255, 255, 0.1); /* 半透明背景 */
+    z-index: 10; /* 层级 */
 }
 
-/* 加载动画样式 */
+/* 加载动画旋转器样式 */
 .loader {
-    border: var(--loader-border-width) solid var(--theme-primary);
-    border-top: var(--loader-border-width) solid var(--theme-secondary);
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    border: var(--loader-border-width) solid var(--theme-primary); /* 边框样式 */
+    border-top: var(--loader-border-width) solid var(--theme-secondary); /* 顶部边框不同颜色 */
+    border-radius: 50%; /* 圆形 */
+    width: var(--loader-size); /* 宽度 */
+    height: var(--loader-size); /* 高度 */
+    animation: spin 1s linear infinite; /* 旋转动画 */
+}
+
+/* 旋转动画关键帧 */
+@keyframes spin {
+    0% { transform: rotate(0deg); } /* 0度旋转 */
+    100% { transform: rotate(360deg); } /* 360度旋转 */
+}
+
+/* 加载文本样式 */
+.loading-text {
+    margin-top: var(--gap-md-alt);
+    color: var(--theme-secondary); /* 文本颜色 */
+    font-size: var(--font-size-sm); /* 字体大小 */
+}
+
+/* 主要按钮样式 */
+.btn-primary {
+    background-color: var(--theme-primary); /* 背景颜色 */
+    color: white; /* 文本颜色 */
+}
+
+/* 主要按钮悬停状态 */
+.btn-primary:hover {
+    background-color: var(--theme-secondary); /* 悬停背景颜色 */
+    color: white; /* 悬停文本颜色 */
+}
+
+/* 按钮组弹性布局容器 */
+.btn-group {
+    display: flex; /* 弹性布局 */
+    flex-wrap: wrap; /* 允许换行 */
+    gap: var(--gap-md); /* 项目间距 */
+}
+
+/* 代码框样式用于显示配置代码 */
+.code-box {
+    background-color: rgba(255, 255, 255, 0.3); /* 背景颜色 */
+    padding: var(--gap-lg);
+    border-radius: var(--radius-sm); /* 圆角 */
+    font-family: monospace; /* 等宽字体 */
+    margin: var(--gap-lg) 0;
+    word-break: break-all; /* 强制断行 */
+}
+
+/* 主题切换按钮尺寸优化 */
+button.theme-toggle-btn {
+    padding: var(--gap-md) 1.2rem !important; /* 增加内边距提升点击区域 */
+    font-size: calc(var(--font-size-sm) * 1.2); /* 图标尺寸增大20% */
+    line-height: 1; /* 确保图标垂直居中 */
+}
+
+/* 主题切换按钮图标系统 */
+button.theme-toggle-btn {
+    text-indent: -9999px; /* 隐藏原始文本 */
+    overflow: hidden;
+    position: relative;
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+button.theme-toggle-btn::before {
+    content: "☀️"; /* 浅色模式默认图标 */
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: calc(var(--font-size-sm) * 1.2);
+    transition: transform var(--duration-sm) var(--easing-standard);
+}
+
+[data-bs-theme="dark"] button.theme-toggle-btn::before {
+    content: "🌙"; /* 深色模式图标 */
+}
+
+/* 太阳悬停旋转效果（仅浅色模式） */
+[data-bs-theme="light"] button.theme-toggle-btn:hover::before {
     animation: spin 1s linear infinite;
 }
 
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+/* 强化主题切换按钮样式 - 确保在深色模式下可见 */
+button.theme-toggle-btn,
+button.theme-toggle-btn:hover,
+button.theme-toggle-btn.active {
+    background-color: transparent !important; /* 透明背景色 */
+    border: none !important; /* 移除边框 */
+    color: var(--theme-secondary) !important; /* 默认颜色 */
+    transition: color var(--duration-sm) var(--easing-standard) !important; /* 颜色过渡动画 */
 }
 
-.loading-text {
-    margin-top: 10px;
-    color: #156c54;
-    font-size: 16px;
+button.theme-toggle-btn:hover {
+    color: var(--theme-toggle-underline-hover-color); /* 悬停时颜色 */
 }
-.btn-primary {
-    background-color: var(--theme-primary);  /* 背景色 */
-    color: white;  /* 设置文字颜色 */
-}
-.btn-primary:hover {
-    background-color: var(--theme-secondary);  /* 自定义背景色 */
-    color: white;  /* 设置文字颜色 */
-}
-.code-box {
-    background-color: rgba(255, 255, 255, 0.3);
-    padding: 1rem;
-    border-radius: 4px;
-    font-family: monospace;
-    margin: 1rem 0;
-    word-break: break-all;
+
+/* 移除下划线指示器后的替代视觉反馈 */
+button.theme-toggle-btn.active {
+    transform: scale(1.05); /* 激活状态轻微放大，替代下划线反馈 */
+    transition: all var(--duration-sm) var(--easing-standard) !important;
 }

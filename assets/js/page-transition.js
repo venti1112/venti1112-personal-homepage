@@ -1,43 +1,43 @@
+// DOM加载完成后初始化页面过渡功能
 document.addEventListener('DOMContentLoaded', function() {
-    // 页面标题映射
+    // 页面标题映射表，用于动态更新浏览器标签页标题
     const pageTitles = {
         home: '首页',
         about: '关于',
         rustdesk: 'RustDesk服务器'
     };
 
-    let currentPage = null;
-    let isAnimating = false;
-    let nextPage = null;
-    let navLinks = [];
+    let currentPage = null;  // 当前显示的页面ID
+    let isAnimating = false;   // 动画进行中标志
+    let nextPage = null;       // 排队等待的下一个页面ID
+    let navLinks = [];         // 导航链接元素集合
 
-    // 获取DOM元素
+    // 获取关键DOM元素引用
     const contentBox = document.getElementById('content-box');
     const contentLoading = document.getElementById('content-loading');
     const pageContent = document.getElementById('page-content');
 
-    /**
-     * 重置内容区域高度
-     */
+    // 重置内容区域高度以适应新内容
     function resetContentBoxHeight() {
         const transition = contentBox.style.transition;
         contentBox.style.transition = 'none';
         contentBox.style.height = 'auto';
-        void contentBox.offsetHeight; // 强制重排
+        void contentBox.offsetHeight; // 强制浏览器重排
         contentBox.style.transition = transition;
     }
 
     /**
-     * 更新导航链接状态
-     * @param {string} pageId - 页面ID
+     * 更新导航链接的激活状态和下划线位置
+     * @param {string} pageId - 目标页面ID
      */
     function updateNavLinksState(pageId) {
+        // 更新所有导航链接的激活类
         navLinks.forEach(link => {
             link.classList.toggle('active', link.dataset.page === pageId);
             link.classList.toggle('nav-link', true);
         });
 
-        // 更新导航横条位置
+        // 计算并更新导航横条的位置和宽度
         const activeLink = document.querySelector('.nav-link.active');
         if (activeLink) {
             const container = document.querySelector('.navbar > .container-fluid');
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const underline = document.querySelector('.nav-underline');
             if (underline) {
                 const offset = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--underline-offset'));
-                // 恢复原始工作实现：直接设置最终样式，由浏览器自动触发CSS过渡
+                // 直接设置样式，由CSS过渡实现平滑动画
                 underline.style.width = `${width}px`;
                 underline.style.transform = `translateX(${offsetLeft + offset}px)`;
             }
@@ -59,16 +59,19 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     /**
-     * 显示指定页面
-     * @param {string} pageId - 页面ID
+     * 显示指定页面内容并处理过渡动画
+     * @param {string} pageId - 页面标识符
      * @param {boolean} isInitial - 是否为初始加载
      */
     function showPage(pageId, isInitial = false) {
-        // 验证页面ID
+        // 验证页面ID有效性
         if (!pageTitles[pageId]) {
             console.error(`无效的页面ID: ${pageId}`);
             pageId = 'home';
         }
+
+        // 立即更新页面标题
+        document.title = `${pageTitles[pageId]} - venti1112的小站`;
 
         // 防止重复加载或动画冲突
         if (currentPage === pageId && !isInitial) return;
@@ -77,10 +80,10 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // 显示加载提示
+        // 显示内容加载提示
         contentLoading.style.display = 'flex';
 
-        // 加载页面内容
+        // 通过fetch异步加载页面HTML内容
         fetch(`/page/${pageId}.html`)
             .then(response => {
                 if (!response.ok) throw new Error(`加载页面失败: ${response.status}`);
@@ -89,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(html => {
                 contentLoading.style.display = 'none';
 
-                // 初始加载
+                // 初始加载：直接填充内容
                 if (!currentPage) {
                     pageContent.innerHTML = html;
                     currentPage = pageId;
@@ -102,18 +105,18 @@ document.addEventListener('DOMContentLoaded', function() {
                     return;
                 }
 
-                // 动画状态标记
+                // 标记动画开始
                 isAnimating = true;
 
                 // 更新导航状态
                 updateNavLinksState(pageId);
 
-                // 确定动画方向
+                // 确定滑动方向（根据页面索引）
                 const currentIndex = navLinks.findIndex(link => link.dataset.page === currentPage);
                 const targetIndex = navLinks.findIndex(link => link.dataset.page === pageId);
                 const directionClass = currentIndex < targetIndex ? 'slide-out-left' : 'slide-out-right';
 
-                // 添加滑出动画
+                // 添加滑出动画类
                 contentBox.classList.add(directionClass);
 
                 // 动画完成后更新内容
@@ -123,15 +126,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     contentBox.classList.remove('slide-out-left', 'slide-out-right', 'slide-in-bottom');
                     contentBox.classList.add('slide-in-bottom');
 
-                    // 动画结束后清理
+                    // 动画结束后清理状态
                     setTimeout(() => {
                         contentBox.classList.remove('slide-in-bottom');
                         currentPage = pageId;
                         isAnimating = false;
                         document.documentElement.scrollTop = 0;
-                        document.title = `${pageTitles[pageId]} - venti1112的小站`;
 
-                        // 处理排队的页面切换
+                        // 处理排队的页面切换请求
                         if (nextPage) {
                             const target = nextPage;
                             nextPage = null;
@@ -149,16 +151,16 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
 
-    // 初始化
+    // 初始化应用状态和事件监听
     function init() {
-        // 获取所有带data-page属性的导航链接
+        // 收集所有可导航的链接
         navLinks = Array.from(document.querySelectorAll('[data-page]'));
 
         // 从URL哈希获取初始页面
         const hash = window.location.hash.substring(1) || 'home';
         showPage(hash, true);
 
-        // 监听窗口大小变化
+        // 监听窗口大小变化事件
         let resizeTimeout;
         const handleResize = () => {
             clearTimeout(resizeTimeout);
@@ -173,12 +175,12 @@ document.addEventListener('DOMContentLoaded', function() {
         window.addEventListener('orientationchange', handleResize);
     }
 
-    // 绑定事件监听器
+    // 监听URL哈希变化以支持前进后退按钮
     window.addEventListener('hashchange', () => {
         const hash = window.location.hash.substring(1);
         if (hash) showPage(hash);
     });
 
-    // 初始化页面
+    // 启动应用初始化
     init();
 });
