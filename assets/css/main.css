@@ -108,7 +108,7 @@ html, body {
 }
 
 body {
-    background: url('/assets/image/wp.jpg') no-repeat center center fixed;
+    background: url('https://patchwiki.biligame.com/images/ys/c/cd/mcrmwbcdpv5wdpyunbpnhpv8sk1603q.jpg') no-repeat center center fixed;
     background-size: cover;
     background-color: var(--theme-bg);
     padding-top: calc(var(--navbar-min-height) + var(--gap-lg));
