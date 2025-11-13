@@ -1,99 +1,64 @@
 <!DOCTYPE html>
-<html lang="zh-CN" dir="ltr">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
-    <meta name="description" content="venti1112的个人网站，包含个人介绍和RustDesk服务器信息">
-    <meta name="theme-color" content="#156c54">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>venti1112的小站</title>
     <link rel="icon" type="image/jpg" href="/assets/image/favicon.jpg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="/assets/css/main.css">
-    <script src="/assets/js/page-switch.js" defer></script>
-    <script src="/assets/js/copy.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous" defer></script>
+    <script src="/assets/js/page-transition.js" defer></script>
     <script src="/assets/js/theme.js" defer></script>
+    <script src="/assets/js/copy.js" defer></script>
+    <!-- 预加载页面资源 -->
     <link rel="preload" href="/page/home.html" as="document">
     <link rel="preload" href="/page/about.html" as="document">
     <link rel="preload" href="/page/rustdesk.html" as="document">
-    <style>
-        #loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #ffffff;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.3s;
-        }
-        .loader {
-            border: 10px solid #4cd8b8;
-            border-top: 10px solid #156c54;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        .loading-text {
-            margin-top: 20px;
-            color: #4cd8b8;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            font-size: 30px;
-            font-weight: bold;
-        }
-    </style>
 </head>
-<body>
-    <div id="loading-screen" aria-live="polite" aria-label="页面加载中">
-        <div class="loader" role="status"></div>
-        <p class="loading-text">加载中...</p>
-    </div>
-    <header>
-        <nav aria-label="主导航">
-            <div class="nav-container">
-                <img src="/assets/image/favicon.jpg" alt="venti1112头像" class="nav-avatar" width="40" height="40">
-                <a href="#home" class="nav-link" data-page="home">首页</a>
-                <a href="#about" class="nav-link" data-page="about">关于我</a>
-                <a href="#rustdesk" class="nav-link" data-page="rustdesk">RustDesk服务器</a>
-                <button id="theme-toggle" class="theme-toggle" aria-label="切换深色模式">
-                    <span class="icon sun">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="12" cy="12" r="4" stroke="#4cd8b8" stroke-width="2" fill="none"/>
-                            <path d="M12 1V3M12 21V23M4.22 4.22L5.64 5.64M18.36 18.36L19.78 19.78M1 12H3M21 12H23M4.22 19.78L5.64 18.36M18.36 5.64L19.78 4.22" stroke="#4cd8b8" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </span>
-                    <span class="icon moon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M21 12.79C20.8427 14.4922 20.2039 16.1144 19.1583 17.4668C18.1127 18.8192 16.7035 19.8458 15.0957 20.4265C13.4879 21.0073 11.748 21.1181 10.0795 20.7461C8.41104 20.3741 6.88296 19.5345 5.67422 18.3258C4.46548 17.117 3.62593 15.589 3.2539 13.9205C2.88187 12.252 2.99271 10.5121 3.57345 8.9043C4.15419 7.29651 5.18082 5.88729 6.53321 4.8417C7.8856 3.79611 9.5078 3.15732 11.21 3C10.2134 4.34827 9.73385 6.00945 9.85854 7.68141C9.98323 9.35338 10.7039 10.9251 11.8894 12.1106C13.0749 13.2961 14.6466 14.0168 16.3186 14.1415C17.9906 14.2662 19.6517 13.7866 21 12.79Z" stroke="#4cd8b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </span>
+<body class="bg-primary">
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <!-- Logo -->
+            <a class="navbar-brand" href="#home">
+            <img src="/assets/image/favicon.jpg" alt="venti1112的小站">
+            </a>
+            <!-- 移动端汉堡菜单按钮 -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- 菜单 -->
+            <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link active" href="#home" data-page="home">首页</a></li>
+                <li class="nav-item"><a class="nav-link" href="#about" data-page="about">关于</a></li>
+                <li class="nav-item"><a class="nav-link" href="#rustdesk" data-page="rustdesk">RustDesk服务器</a></li>
+            </ul>
+            <div class="nav-underline"></div>
+            <!-- 右边功能区 -->
+            <form class="d-flex">
+                <!-- 深色模式切换按钮 -->
+                <button class="btn btn-outline-secondary theme-toggle-btn" id="themeToggle" type="button"
+                    data-bs-theme-value="dark"
+                    aria-label="切换深色模式">
+                    <i class="bi bi-moon"></i>
                 </button>
-                <div class="nav-underline"></div>
-            </div>
-        </nav>
-    </header>
+            </form>
+        </div>
+    </div>
+    </nav>
+
+    <!-- 主要内容区域 -->
     <main class="content-box" id="content-box">
+        <!-- 内容加载中提示 -->
         <div id="content-loading" class="content-loading" style="display: none;" aria-live="polite">
             <div class="loader" style="border-width: 5px; width: 40px; height: 40px;" role="status"></div>
             <p class="loading-text" style="margin-top: 10px; color: #156c54; font-size: 16px;">加载中...</p>
         </div>
+        <!-- 页面内容容器 -->
         <div id="page-content" role="main"></div>
     </main>
-    <script>
-    window.addEventListener('load', function() {
-        const loadingScreen = document.getElementById('loading-screen');
-        loadingScreen.style.opacity = '0';
-        setTimeout(() => {
-            loadingScreen.style.display = 'none';
-        }, 300);
-    });
-    </script>
 </body>
 </html>
